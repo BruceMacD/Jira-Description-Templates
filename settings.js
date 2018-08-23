@@ -17,7 +17,7 @@ addTemplate.onclick = function(element) {
         {
           code:
             `// This assumes no other attribute is with label for=description
-            let descriptionForm = document.getElementById("description");
+            var descriptionForm = document.getElementById("description");
             
             // example
             var newEl = document.createElement('div');
