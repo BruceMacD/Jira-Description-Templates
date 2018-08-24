@@ -8,11 +8,11 @@ chrome.runtime.onInstalled.addListener(function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
         // Enable the extension when on an Atlassian or Jira domain
-        //pageUrl: {hostEquals: 'brucetesting.atlassian.net'},
-        //css: ["textarea[id='description']"]
+        // TODO: make more broad
+        pageUrl: {hostEquals: 'brucetesting.atlassian.net'},
+        css: ["textarea[id='description']"]
       })],
       actions: [new chrome.declarativeContent.ShowPageAction()]
-      //actions: [console.log("description detected")]
     }]);
   });
 });
