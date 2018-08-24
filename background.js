@@ -7,12 +7,11 @@ chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
-        // Enable the extension when on an Atlassian or Jira domain
-        //pageUrl: {hostEquals: 'brucetesting.atlassian.net'},
-        //css: ["textarea[id='description']"]
+        // Enable the extension when on an Atlassian or Jira domain and a ticket is being created
+        pageUrl: {hostEquals: 'brucetesting.atlassian.net'},
+        css: ["textarea[id='description']"]
       })],
       actions: [new chrome.declarativeContent.ShowPageAction()]
-      //actions: [console.log("description detected")]
     }]);
   });
 });
