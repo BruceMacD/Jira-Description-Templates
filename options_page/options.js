@@ -3,6 +3,8 @@
 let addTemplate = document.getElementById('addTemplate');
 let saveTemplate = document.getElementById('saveTemplate');
 let newTemplate = document.getElementById('newTemplate');
+let templateText = document.getElementById('template');
+let templateTitle = document.getElementById('title');
 
 //hide to start
 newTemplate.style.display = "none";
@@ -50,7 +52,40 @@ addTemplate.onclick = function(element) {
 };
 
 saveTemplate.onclick = function(element) {
-  // save the values to local storage
-  addTemplate.style.display = "inline";
-  newTemplate.style.display = "none";
+  // get the values
+  var titleVal = title.value;
+  var templateVal = template.value;
+
+  title.classList.remove("is-invalid");
+  template.classList.remove("is-invalid");
+
+  if (titleVal === "" || templateVal === "") {
+    if (titleVal === "") {
+      title.classList.add("is-invalid");
+    }
+    if (templateVal === "") {
+      template.classList.add("is-invalid");
+    }
+  } else {
+    // save the values to local storage
+    chrome.storage.sync.get(["storedTemplates"], function(templates) {
+      console.log('Stored tempates:');
+      console.log(templates);
+
+      //TODO: Add new entry
+
+      // var newEntry = {
+      //   "title": titleVal,
+      //   "template": templateVal
+      // };
+
+      // templates
+      // chrome.storage.sync.set({ "yourBody": "myBody" }, function(){
+      //   //  A data saved callback omg so fancy
+      // });
+    });
+
+    addTemplate.style.display = "inline";
+    newTemplate.style.display = "none";
+  }
 };
