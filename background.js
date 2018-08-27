@@ -1,8 +1,11 @@
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
+  // Start by loading any locally stored templates from previous sessions
+  chrome.storage.sync.get(["storedTemplates"], function(templates) {
     console.log('Jira Description Templates running...');
+    console.log('Stored tempates:');
+    console.log(templates);
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{

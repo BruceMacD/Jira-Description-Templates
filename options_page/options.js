@@ -1,11 +1,11 @@
 'use strict';
 
 let addTemplate = document.getElementById('addTemplate');
+let saveTemplate = document.getElementById('saveTemplate');
+let newTemplate = document.getElementById('newTemplate');
 
-// chrome.storage.sync.get('color', function(data) {
-//   changeColor.style.backgroundColor = 'blue';
-//   changeColor.setAttribute('value', data.color);
-//  });
+//hide to start
+newTemplate.style.display = "none";
 
 var templatesTest = 
 {
@@ -33,6 +33,7 @@ for(var i = 0; i < templateCount; i++) {
   templateContainer.appendChild(div);
 
   var button = document.createElement('button');
+  button.className = "btn btn-info";
   button.innerHTML = temp.title;
   button.value = temp.template;
   button.onclick = function(element){
@@ -42,25 +43,14 @@ for(var i = 0; i < templateCount; i++) {
   templateContainer.appendChild(button);
 };
 
-// addTemplate.onclick = function(element) {
-//   //let color = element.target.value;
-//   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//     chrome.tabs.executeScript(
-//         tabs[0].id,
-//         // where the text can be set from template
-//         //{code: 'document.getElementById("description").value=\'hello\';'});
-//         {
-//           code:
-//             `// This assumes no other attribute is with label for=description
-//             var descriptionForm = document.getElementById("description");
-            
-//             // example
-//             var newEl = document.createElement('div');
-//             newEl.innerHTML = '<p>Hello World!</p>';
-            
-//             descriptionForm.parentNode.insertBefore(newEl, descriptionForm);
-//             `
-//         }
-//       );
-//   });
-// };
+addTemplate.onclick = function(element) {
+  // show dialog
+  newTemplate.style.display = "inline";
+  addTemplate.style.display = "none";
+};
+
+saveTemplate.onclick = function(element) {
+  // save the values to local storage
+  addTemplate.style.display = "inline";
+  newTemplate.style.display = "none";
+};
