@@ -1,6 +1,6 @@
 'use strict';
 
-let addTemplate = document.getElementById('addTemplate');
+let addNewTemplate = document.getElementById('addNewTemplate');
 let saveTemplate = document.getElementById('saveTemplate');
 let newTemplate = document.getElementById('newTemplate');
 let templateText = document.getElementById('template');
@@ -9,46 +9,34 @@ let templateTitle = document.getElementById('title');
 //hide to start
 newTemplate.style.display = "none";
 
-var templatesTest = 
-{
-  "templates":
-  [
-    {
-      "title": "BUG",
-      "template": "hello \nbug"
-    },
-    {
-      "title": "FEATURE",
-      "template": "hello \nfeature"
-    }
-  ]
-};
-
-var templateCount = Object.keys(templatesTest.templates).length;
 var templateContainer = document.getElementById('templateContainer'); 
 
-// populate the container with template buttons
-for(var i = 0; i < templateCount; i++) {
-  var temp = templatesTest.templates[i];
+chrome.storage.sync.get(["templates"], function(storedTemplates) {
 
-  var div = document.createElement("div");
-  templateContainer.appendChild(div);
+  var templateCount = Object.keys(storedTemplates.templates).length;
+  // populate the container with template buttons
+  for(var i = 0; i < templateCount; i++) {
+    var temp = storedTemplates.templates[i];
 
-  var button = document.createElement('button');
-  button.className = "btn btn-info";
-  button.innerHTML = temp.title;
-  button.value = temp.template;
-  button.onclick = function(element){
-    console.log(element.target.value);
-  }
+    var div = document.createElement("div");
+    templateContainer.appendChild(div);
 
-  templateContainer.appendChild(button);
-};
+    var button = document.createElement('button');
+    button.className = "btn btn-info";
+    button.innerHTML = temp.title;
+    button.value = temp.template;
+    button.onclick = function(element){
+      console.log(element.target.value);
+    }
 
-addTemplate.onclick = function(element) {
+    templateContainer.appendChild(button);
+  };
+});
+
+addNewTemplate.onclick = function(element) {
   // show dialog
   newTemplate.style.display = "inline";
-  addTemplate.style.display = "none";
+  addNewTemplate.style.display = "none";
 };
 
 saveTemplate.onclick = function(element) {
@@ -68,24 +56,25 @@ saveTemplate.onclick = function(element) {
     }
   } else {
     // save the values to local storage
-    chrome.storage.sync.get(["storedTemplates"], function(templates) {
+    chrome.storage.sync.get(["templates"], function(storedTemplates) {
+      // For debug
       console.log('Stored tempates:');
-      console.log(templates);
+      console.log(storedTemplates);
 
-      //TODO: Add new entry
+      var entries = storedTemplates.templates;
+      var newEntry = {
+        "title": titleVal,
+        "template": templateVal
+      };
+      entries.push(newEntry);
 
-      // var newEntry = {
-      //   "title": titleVal,
-      //   "template": templateVal
-      // };
-
-      // templates
-      // chrome.storage.sync.set({ "yourBody": "myBody" }, function(){
-      //   //  A data saved callback omg so fancy
-      // });
+      chrome.storage.sync.set({ "templates": entries }, function(){
+        console.log("templates updated");
+      });
+      // For debug
+      //chrome.storage.sync.get(["templates"], function(storedTemplates) { console.log(storedTemplates)});
     });
 
-    addTemplate.style.display = "inline";
-    newTemplate.style.display = "none";
+    location.reload();
   }
 };
