@@ -6,14 +6,18 @@
 
 button {
     height: 5%;
-    width: 80%;
+    width: 85%;
     border: 0.1em;
-    background: none;
-    box-shadow: none;
-    border-style: solid;
-    color: blue;
     font-size: 1.8em; 
     margin-bottom: 3%;
+}
+
+#templateButton {
+    width: 70%;
+}
+
+#deleteButton {
+    width: 15%;
 }
 
 p {
