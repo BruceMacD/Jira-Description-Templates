@@ -1,11 +1,18 @@
+.center {
+    margin: auto;
+    width: 100%;
+    text-align:center;
+}
+
 button {
-    height: 1.5em;
-    width: 8em;
+    height: 5%;
+    width: 100%;
     border: 0.1em;
-    background: none;
-    box-shadow: none;
-    border-style: solid;
-    color: blue;
-    font-size: 1.5em; 
-    margin-bottom: 0.3em;
+    font-size: 0.8em; 
+    margin-bottom: 3%;
+}
+
+p {
+    font-size: 18px; 
+    margin-bottom: 0%;
 }
