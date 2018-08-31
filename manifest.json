@@ -2,7 +2,7 @@
   "name": "Jira Description Templates",
   "version": "1.0",
   "description": "Autofill Jira ticket descriptions from a template.",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "permissions": ["activeTab", "declarativeContent", "storage", "https://*.atlassian.net/"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false

@@ -12,10 +12,20 @@ chrome.runtime.onInstalled.addListener(function() {
       conditions: [new chrome.declarativeContent.PageStateMatcher({
         // Enable the extension when on an Atlassian or Jira domain
         // TODO: make more broad
-        pageUrl: {hostEquals: 'brucetesting.atlassian.net'},
+        pageUrl: {hostContains: 'atlassian.net'},
         css: ["textarea[id='description']"]
       })],
       actions: [new chrome.declarativeContent.ShowPageAction()]
+    }]);
+    
+    chrome.declarativeContent.onPageChanged.addRules([{
+      conditions: [new chrome.declarativeContent.PageStateMatcher({
+        // Enable the extension when on an Atlassian or Jira domain
+        // TODO: make more broad
+        pageUrl: {hostContains: 'atlassian.net'},
+        css: ["textarea[id='description']"]
+      })],
+      actions: [new chrome.declarativeContent.RequestContentScript({js: ["page_actions/actions.js"]})]
     }]);
   });
 });
