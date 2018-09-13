@@ -23,7 +23,7 @@ While the add-on is inactive you may still create and modify stored templates by
 
 Once the add-on is active on a 'Create issue' page simply click on the icon to display available templates. When the title of a template is clicked the text-field of the issue description will be populated with the corresponding text.
 
-## Lisence
+## License
 You may modify this plugin for any use you see fit.
 
 ## Future Work
